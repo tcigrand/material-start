@@ -19,6 +19,8 @@
 
     self.selected     = null;
     self.users        = [ ];
+    self.homePlayers  = [ ];
+    self.awayPlayers  = [ ];
     self.selectUser   = selectUser;
     self.toggleList   = toggleUsersList;
     self.showContactOptions  = showContactOptions;
@@ -29,6 +31,8 @@
           .loadAllUsers()
           .then( function( users ) {
             self.users    = [].concat(users);
+            self.homePlayers = self.users.filter(function(user){ console.log(user.team); return user.team === 'home'; });
+            self.awayPlayers = self.users.filter(function(user){ console.log(user.team); return user.team === 'away'; });
             self.selected = users[0];
           });
 

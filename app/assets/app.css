@@ -29,7 +29,7 @@ md-list .md-button {
   width: 100%;
 }
   md-list .md-button.selected {
-    color: #03a9f4;
+    background-color: rgba(158,158,158,.7);
   }
 
   md-sidenav  md-list {
@@ -38,6 +38,12 @@ md-list .md-button {
 
 
 /* Primary content area */
+
+.vertical-container {
+  display:         flex;
+  align-items: center;
+  justify-content: center;
+}
 
 #content {
   overflow: hidden;

@@ -1,93 +1,107 @@
 <!DOCTYPE html>
-<html lang="en" >
-  <head>
-    <title>Angular Material - Starter App</title>
+<html lang="en">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+<head>
+  <title>Angular Material - Starter App</title>
 
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
-    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
-    <link rel="stylesheet" href="assets/app.css"/>
-  </head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-  <body ng-app="starterApp" layout="row" ng-controller="UserController as ul">
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+  <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="assets/app.css" />
+</head>
 
-  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
-                md-component-id="left"
-                md-is-locked-open="$mdMedia('gt-sm')">
+<body ng-app="starterApp" layout="row" ng-controller="UserController as ul">
+
+  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-theme="iowa" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
 
     <md-toolbar class="md-whiteframe-z1">
-      <h1>Users</h1>
+      <h1>Iowa Hawkeyes</h1>
     </md-toolbar>
 
-    <md-list>
-      <md-list-item ng-repeat="it in ul.users">
-          <md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
-            <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
-            {{it.name}}
-          </md-button>
+    <md-list style="min-height: 0; flex: 1; overflow: auto;">
+      <md-list-item ng-repeat="it in ul.homePlayers">
+        <md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
+          <img ng-src="{{it.avatar}}" class="avatar"></img>
+          {{it.name}}
+        </md-button>
       </md-list-item>
     </md-list>
 
   </md-sidenav>
 
-
-  <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
-
-    <md-toolbar layout="row" class="md-whiteframe-z1">
-      <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show User List">
-        <md-icon md-svg-icon="menu" ></md-icon>
-      </md-button>
-      <h1>Angular Material - Starter App</h1>
-    </md-toolbar>
+  <div class='vertical-container' tabIndex="-1" role="main" class="md-whiteframe-z2">
 
     <md-content flex id="content">
-        <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>
-        <h2>{{ul.selected.name}}</h2>
-        <p>{{ul.selected.content}}</p>
+      <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>
+      <h2>{{ul.selected.name}}</h2>
+      <p>{{ul.selected.content}}</p>
 
-        <md-button class="contact" md-no-ink ng-click="ul.showContactOptions($event)" aria-label="Contact User">
-          <md-tooltip>Contact {{ ul.selected.name }}</md-tooltip>
-          <md-icon md-svg-icon="share"></md-icon>
-        </md-button>
-      </md-content>
+      <md-button class="contact" md-no-ink ng-click="ul.showContactOptions($event)" aria-label="Contact User">
+        <md-tooltip>Contact {{ ul.selected.name }}</md-tooltip>
+        <md-icon md-svg-icon="share"></md-icon>
+      </md-button>
+    </md-content>
 
   </div>
 
-    <script src="./bower_components/angular/angular.js"></script>
-    <script src="./bower_components/angular-animate/angular-animate.js"></script>
-    <script src="./bower_components/angular-aria/angular-aria.js"></script>
-    <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
+  <md-sidenav class="site-sidenav md-sidenav-right md-whiteframe-z2" md-theme="ohiost" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
 
-    <script src="./src/users/Users.js"></script>
-    <script src="./src/users/UserController.js"></script>
-    <script src="./src/users/UserService.js"></script>
+    <md-toolbar class="md-whiteframe-z1">
+      <h1>Ohio State Buckeyes</h1>
+    </md-toolbar>
 
-    <script type="text/javascript">
+    <md-list style="min-height: 0; flex: 1; overflow: auto;">
+      <md-list-item ng-repeat="it in ul.awayPlayers">
+        <md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
+          <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
+          <span class="md-list-item-text compact">{{it.name}}</span>
+        </md-button>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
 
-          angular
-              .module('starterApp', ['ngMaterial', 'users'])
-              .config(function($mdThemingProvider, $mdIconProvider){
+  <script src="./bower_components/angular/angular.js"></script>
+  <script src="./bower_components/angular-animate/angular-animate.js"></script>
+  <script src="./bower_components/angular-aria/angular-aria.js"></script>
+  <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
 
-                  $mdIconProvider
-                      .defaultIconSet("./assets/svg/avatars.svg", 128)
-                      .icon("menu"       , "./assets/svg/menu.svg"        , 24)
-                      .icon("share"      , "./assets/svg/share.svg"       , 24)
-                      .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
-                      .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
-                      .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
-                      .icon("phone"      , "./assets/svg/phone.svg"       , 512);
+  <script src="./src/users/Users.js"></script>
+  <script src="./src/users/UserController.js"></script>
+  <script src="./src/users/UserService.js"></script>
 
-                      $mdThemingProvider.theme('default')
-                          .primaryPalette('brown')
-                          .accentPalette('red');
+  <script type="text/javascript">
+    angular
+      .module('starterApp', ['ngMaterial', 'users'])
+      .config(function($mdThemingProvider, $mdIconProvider) {
 
-              });
+        $mdIconProvider
+          .defaultIconSet("./assets/svg/avatars.svg", 128)
+          .icon("menu", "./assets/svg/menu.svg", 24)
+          .icon("share", "./assets/svg/share.svg", 24)
+          .icon("google_plus", "./assets/svg/google_plus.svg", 512)
+          .icon("hangouts", "./assets/svg/hangouts.svg", 512)
+          .icon("twitter", "./assets/svg/twitter.svg", 512)
+          .icon("phone", "./assets/svg/phone.svg", 512);
 
-    </script>
+        $mdThemingProvider.theme('default');
 
-  </body>
+        $mdThemingProvider.theme('iowa')
+          .primaryPalette('amber')
+          .accentPalette('yellow');
+
+        $mdThemingProvider.theme('ohiost')
+          .primaryPalette('red', {
+            default: 'A700'
+          })
+          .accentPalette('red');
+
+      });
+  </script>
+
+</body>
+
 </html>
