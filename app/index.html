@@ -16,24 +16,28 @@
 
 <body ng-app="starterApp" layout="row" ng-controller="UserController as ul">
 
-  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-theme="iowa" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+  <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z5" md-theme="iowa" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
 
-    <md-toolbar class="md-whiteframe-z1">
+    <md-toolbar class="md-whiteframe-z5">
       <h1>Iowa Hawkeyes</h1>
     </md-toolbar>
 
     <md-list style="min-height: 0; flex: 1; overflow: auto;">
       <md-list-item ng-repeat="it in ul.homePlayers">
-        <md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
+        <div ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }" layout="row">
           <img ng-src="{{it.avatar}}" class="avatar"></img>
-          {{it.name}}
-        </md-button>
+          <div class="md-list-item-text compact">
+            <h3>{{it.name}}</h3>
+            <p>{{it.position}} - #{{it.number}}</p>
+            <p>{{it.statLine}}</p>
+          </div>
+        </div>
       </md-list-item>
     </md-list>
 
   </md-sidenav>
 
-  <div class='vertical-container' tabIndex="-1" role="main" class="md-whiteframe-z2">
+  <div tabIndex="-1" role="main" class="md-whiteframe-z5">
 
     <md-content flex id="content">
       <img ng-src="{{ul.selected.avatar}}" class="avatar"></img>
@@ -44,13 +48,15 @@
         <md-tooltip>Contact {{ ul.selected.name }}</md-tooltip>
         <md-icon md-svg-icon="share"></md-icon>
       </md-button>
+
+      <div ng-viewport="baaaa"></div>
     </md-content>
 
   </div>
 
-  <md-sidenav class="site-sidenav md-sidenav-right md-whiteframe-z2" md-theme="ohiost" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+  <md-sidenav class="site-sidenav md-sidenav-right md-whiteframe-z5" md-theme="ohiost" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
 
-    <md-toolbar class="md-whiteframe-z1">
+    <md-toolbar class="md-whiteframe-z5">
       <h1>Ohio State Buckeyes</h1>
     </md-toolbar>
 
@@ -67,7 +73,17 @@
   <script src="./bower_components/angular/angular.js"></script>
   <script src="./bower_components/angular-animate/angular-animate.js"></script>
   <script src="./bower_components/angular-aria/angular-aria.js"></script>
+  <script src="./bower_components/angular-new-router/dist/router.es5.js"></script>
   <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.2/jquery.tipsy.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://rawgit.com/virajsanghvi/d3.basketball-shot-chart/master/d3.basketball-shot-chart.css" type="text/css">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.2/jquery.tipsy.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="https://rawgit.com/virajsanghvi/d3-plugins/master/hexbin/hexbin.js"></script>
+  <script src="https://rawgit.com/misoproject/d3.chart/master/d3.chart.js"></script>
+  <script src="https://rawgit.com/virajsanghvi/d3.chart.defaults/master/d3.chart.defaults.js"></script>
+  <script src="https://rawgit.com/virajsanghvi/d3.basketball-shot-chart/master/d3.basketball-shot-chart.js"></script>
 
   <script src="./src/users/Users.js"></script>
   <script src="./src/users/UserController.js"></script>
@@ -75,7 +91,7 @@
 
   <script type="text/javascript">
     angular
-      .module('starterApp', ['ngMaterial', 'users'])
+      .module('starterApp', ['ngMaterial', 'users', 'ngNewRouter'])
       .config(function($mdThemingProvider, $mdIconProvider) {
 
         $mdIconProvider
@@ -99,7 +115,7 @@
           })
           .accentPalette('red');
 
-      });
+        });
   </script>
 
 </body>
